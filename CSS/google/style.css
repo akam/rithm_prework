@@ -1,0 +1,64 @@
+article{
+	margin-top: 200px;
+}
+
+article img{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#search input[type="text"]{
+	width: 300px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+}
+
+#search input[type="submit"]{
+	display: block;
+	margin-top: 2px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+header{
+	text-align: right;
+}
+
+header a{
+	text-decoration: none;
+	color: grey;
+	margin-left: 15px;
+}
+
+footer{
+	background-color: lightgrey;
+	height: 40px;
+}
+
+#about a{
+	text-decoration: none;
+	color: grey;
+	margin-right: 15px;
+}
+
+#settings{
+	text-align: right;
+}
+
+#settings a{
+	text-decoration: none;
+	color: grey;
+	margin-right: 15px;
+}
+
+footer{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
