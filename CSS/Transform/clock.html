@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Clock</title>
+	<style>
+		#clockface{
+			width: 300px;
+			height: 300px;
+			border-radius: 300px;
+			margin: 16px 0px;
+			border: 5px solid black;
+			position: absolute;
+		}
+		#secondhand{
+			background-color: grey;
+			width: 2px;
+			height: 140px;
+			margin: 30px 150px;
+			animation: rotate 6s infinite linear;
+			position: absolute;
+		}
+		#minutehand{
+			background-color: grey;
+			width: 4px;
+			height: 100px;
+			margin: 70px 150px;
+			animation: rotate 360s infinite linear;
+			position: absolute;
+		}
+		#hourhand{
+			background-color: black;
+			width: 6px;
+			height: 70px;
+			margin: 100px 150px;
+			animation: rotate 8640s infinite linear;
+			position: absolute;
+		}
+		@keyframes rotate{
+			0%{
+				transform: rotate(0);
+				transform-origin: bottom center;
+			}
+			100%{
+				transform: rotate(360deg);
+				transform-origin: bottom center;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id="clockface"></div>
+	<div id="minutehand"></div>
+	<div id="hourhand"></div>
+	<div id="secondhand"></div>
+</body>
+</html>
