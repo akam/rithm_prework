@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.wrap{
+			display:block;
+			width: 80%;
+			height: 100px;
+			margin: 20px auto 0px auto;
+			overflow: hidden;
+		}
+		div{
+			display:inline-block;
+		}
+		.redBox{
+			border: 3px solid black;
+			float: left;
+			background: red;
+			width: 15%;
+			padding-bottom: 1000px;
+			margin-bottom: -1000px;
+		}
+		.blueRectangle{
+			border: 3px solid black;
+			float: right;
+			background: lightblue;
+			width: 80%;
+			padding-bottom: 1000px;
+			margin-bottom: -1000px;
+		}
+		footer{
+			border: 3px solid black;
+			width: 99%;
+			background: yellow;
+			padding-bottom: 1000px;
+			margin-bottom: -1000px;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="redBox"></div>
+		<div class="blueRectangle"></div>
+	</div>
+	<div class="wrap">
+		<div class="redBox"></div>
+		<div class="blueRectangle"></div>
+	</div>
+	<div class="wrap">
+		<div class="redBox"></div>
+		<div class="blueRectangle"></div>
+	</div>
+	<div class="wrap">
+		<footer></footer>
+	</div>
+</html>
