@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Mock2</title>
+	<style>
+		.wrap{
+			display: flex;
+			width: 90%;
+			height: 25%;
+			margin: 40px auto 40px auto;
+		}
+		#purple{
+			width: 100px;
+			height: 100px;
+			background: purple;
+			flex-grow: 1;
+			border: 5px solid black;
+		}
+		.wrap1{
+			display: flex;
+			flex-direction: row;
+			width: 90%;
+			height: 100%;
+			justify-content: space-between;
+			margin: 10px auto;
+		}
+		.rectangle{
+			width: 200px;
+			height: 400px;
+			border: 5px solid black;
+		}
+		#red{
+			background: red;
+		}
+		#green{
+			background: green;
+
+		}
+		#orange{
+			background: orange;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div id="purple"></div>
+	</div>
+	<div class="wrap1">
+		<div class="rectangle" id="red"></div>
+		<div class="rectangle" id="green"></div>
+		<div class= "rectangle" id="orange"></div>
+	</div>
+</body>
+</html>
