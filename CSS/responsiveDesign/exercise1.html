@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	section{
+		width: 100px;
+		height: 100px;
+	}
+	.col-4 {
+	    width: 33%;
+	    height: 100%;
+	    background: lightblue;
+	}
+
+	.col-6 {
+	    width: 50%;
+	    height: 100%;
+	    background: lightgreen;
+	}
+
+	.col-12 {
+	    width: 100%;
+	    height: 100%;
+	    background: lightgrey;
+	}
+
+	@media (min-width: 765px) and (max-width: 960px){
+	    .col-4 {
+	        width: 50%;
+	    }
+
+	    .col-6 {
+	        width: 100%;
+	    }
+	}
+
+	@media (max-width: 765px){
+	    .col-4 {
+	        width: 100%;
+	    }
+	}
+	</style>
+</head>
+<body>
+	<section>
+		<div class="col-4"></div>
+		<div class="col-6"></div>
+		<div class="col-12"></div>
+	</section>
+</body>
+</html>
