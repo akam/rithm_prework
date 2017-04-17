@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+    </div>
+    <section id="container">
+        <ul>
+            <li class="first">one</li>
+            <li class="second">two</li>
+            <li class="third">three</li>
+        </ul>
+        <ol>
+            <li class="first">one</li>
+            <li class="second">two</li>
+            <li class="third">three</li>
+        </ol>
+    </section>
+    <div class="footer"> Footer
+    </div>
+    <script>
+        var container = document.getElementById("container");
+        var container1 = document.querySelector("#container");
+        var second = document.getElementsByClassName("#second");
+        var ordered = document.querySelector("ol");
+        ordered.children[2];
+        //container.innerText = "Hello";
+        var footer = document.getElementsByTagName("div")[1];
+        footer.classList.add("main");
+        footer.classList.remove("main");
+        var newListItem = document.createElement("li");
+        newListItem.innerText = "four";
+        var unordered = document.querySelector("ul");
+        unordered.append(newListItem);
+        for(i = 0; i < ordered.children.length; i++){
+            ordered.children[i].style.backgroundColor = "green";
+        }
+        var footer = document.getElementsByTagName("div")[1];
+        footer.parentNode.removeChild(footer);
+    </script>
+</body>
+</html>
