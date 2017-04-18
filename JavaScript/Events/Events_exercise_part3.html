@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script type="text/javascript">
+    	window.onload = function(){
+    		var form = document.querySelector("#addText");
+    		form.addEventListener("submit", function(event){
+    			event.preventDefault();
+    			var inputText = document.querySelector("#input_text");
+    			var list = document.querySelector(".list-group");
+    			var newItem = document.createElement("li");
+    			newItem.innerText = inputText.value;
+    			newItem.classList.add("list-group-item");
+    			list.appendChild(newItem);
+    		})
+    	}
+    </script>
+</head>
+<body>
+	<header>
+		<h1 class="text-center">Simple to do list:</h1>
+		<br>
+	</header>
+	<div class="container">
+		<section class="add_to_do">
+			<form id="addText">
+				<div class="input-inline">
+		 		<input type="text" class="form-inline col-xs-offset-4 col-xs-4" id="input_text">
+		  		<button class="btn btn-default" type="submit">Submit</button>
+		  		</div>
+	  		</form>
+	  		<hr>
+		</section>
+		<section class="list">
+			<ul class="list-group">
+			  <li class="list-group-item">Cras justo odio<span class="input-group-addon"><input type="radio" aria-label="..."></span></li>
+			  <li class="list-group-item">Dapibus ac facilisis in</li>
+			  <li class="list-group-item">Morbi leo risus</li>
+			  <li class="list-group-item">Porta ac consectetur ac</li>
+			  <li class="list-group-item">Vestibulum at eros</li>
+			</ul>
+		</section>
+	</div>
+</body>
+</html>
