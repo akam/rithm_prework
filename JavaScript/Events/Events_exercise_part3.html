@@ -7,15 +7,139 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script type="text/javascript">
     	window.onload = function(){
+            //load in localStorage [Array]
+            var storage = JSON.parse(localStorage.getItem("toDoList"));
+            if(storage === null){
+                storage = [];
+            }
+            function populate(Obj){
+                var inputText = Obj.string;
+                var list = document.querySelector("thead");
+                var newRow = document.createElement("tr");
+                var newData = document.createElement("td");
+                var newData2 = document.createElement("td");
+                var newData3 = document.createElement("td");
+                //Add To do data
+                if(Obj.done === 1){
+                    newData.innerHTML = "<del>" + inputText + "</del>"; 
+                    newData2.innerText = "Done!";
+                } else {
+                    newData.innerText = inputText; 
+                    var newCheckButton = document.createElement("button");
+                    newCheckButton.setAttribute("type", "button");
+                    newCheckButton.classList.add("btn");
+                    newCheckButton.classList.add("btn-success");
+                    newCheckButton.innerHTML = "<span class='glyphicon glyphicon-ok' aria-hidden='true'></span>";
+                    newData2.appendChild(newCheckButton);
+                    newCheckButton.addEventListener("click", function(){
+                        var parent = newData2.parentElement;
+                        parent.firstChild.innerHTML = "<del>" + parent.firstChild.innerHTML + "</del>";
+                        newData2.innerText = "Done!";
+                        for(var k = 0; k < storage.length; k++){
+                        if(storage[k].string === parent.firstChild.innerText){
+                            storage[k].done = 1;
+                            localStorage.setItem("toDoList", JSON.stringify(storage));
+                            break;
+                        }
+
+                    }
+                    })
+                }
+                newRow.appendChild(newData);
+                //Add Check/done button
+
+
+                newRow.appendChild(newData2);
+                //Add Remove button
+                var newRemoveButton = document.createElement("button");
+                newRemoveButton.setAttribute("type", "button");
+                newRemoveButton.classList.add("btn");
+                newRemoveButton.classList.add("btn-danger");
+                newRemoveButton.innerHTML = "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span>";
+                newData3.appendChild(newRemoveButton);
+                newRow.appendChild(newData3);
+                newRemoveButton.addEventListener("click", function(){
+                    var parent1 = newData3.parentElement;
+                    parent1.parentElement.removeChild(parent1);
+                    for(var a = 0; a < storage.length; a++){
+                        if(storage[a].string === parent1.firstChild.innerText){
+                            storage.splice(a, 1);
+                            localStorage.setItem("toDoList", JSON.stringify(storage));
+                        }
+                    }
+                })
+                newRow.appendChild(newData3);
+                //add to table/list
+                list.appendChild(newRow);
+                }
+            for(var i = 0; i < storage.length; i++){
+                populate(storage[i]);
+            }
     		var form = document.querySelector("#addText");
     		form.addEventListener("submit", function(event){
     			event.preventDefault();
     			var inputText = document.querySelector("#input_text");
-    			var list = document.querySelector(".list-group");
-    			var newItem = document.createElement("li");
-    			newItem.innerText = inputText.value;
-    			newItem.classList.add("list-group-item");
-    			list.appendChild(newItem);
+    			if(inputText.value === ''){
+    				return false;
+    			}
+    			var list = document.querySelector("thead");
+    			var newRow = document.createElement("tr");
+    			var newData = document.createElement("td");
+    			var newData2 = document.createElement("td");
+    			var newData3 = document.createElement("td");
+    			//Add To do data
+    			newData.innerText = inputText.value;
+                newRow.appendChild(newData);
+                //Add to storage
+                var newObj = {};
+                newObj.string = inputText.value;
+                newObj.done = 0;
+                storage.push(newObj);
+                localStorage.setItem("toDoList", JSON.stringify(storage));
+    			//Add Check/done button
+    			var newCheckButton = document.createElement("button");
+    			newCheckButton.setAttribute("type", "button");
+    			newCheckButton.classList.add("btn");
+    			newCheckButton.classList.add("btn-success");
+    			newCheckButton.innerHTML = "<span class='glyphicon glyphicon-ok' aria-hidden='true'></span>";
+    			newData2.appendChild(newCheckButton);
+    			newRow.appendChild(newData2);
+    			newCheckButton.addEventListener("click", function(){
+    				var parent = newData2.parentElement;
+    				parent.children[0].innerHTML = "<del>" + parent.children[0].innerHTML + "</del>";
+    				newData2.innerText = "Done!";
+                    for(var k = 0; k < storage.length; k++){
+                        if(storage[k].string === parent.firstChild.innerText){
+                            storage[k].done = 1;
+                            localStorage.setItem("toDoList", JSON.stringify(storage));
+                            break;
+                        }
+
+                    }
+    				//parent.parentElement.appendChild(parent);
+    			})
+   				//Add Remove button
+   				var newRemoveButton = document.createElement("button");
+    			newRemoveButton.setAttribute("type", "button");
+    			newRemoveButton.classList.add("btn");
+    			newRemoveButton.classList.add("btn-danger");
+    			newRemoveButton.innerHTML = "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span>";
+    			newData3.appendChild(newRemoveButton);
+    			newRow.appendChild(newData3);
+    			newRemoveButton.addEventListener("click", function(){
+    				var parent1 = newData3.parentElement;
+    				parent1.parentElement.removeChild(parent1);
+                    for(var b = 0; b < storage.length; b++){
+                        if(storage[b].string === parent1.firstChild.innerText){
+                            storage.splice(b, 1);
+                            localStorage.setItem("toDoList", JSON.stringify(storage));
+                        }
+                    }
+    			})
+    			newRow.appendChild(newData3);
+    			//add to table/list
+    			list.appendChild(newRow);
+    			form.reset();
     		})
     	}
     </script>
@@ -36,13 +160,13 @@
 	  		<hr>
 		</section>
 		<section class="list">
-			<ul class="list-group">
-			  <li class="list-group-item">Cras justo odio<span class="input-group-addon"><input type="radio" aria-label="..."></span></li>
-			  <li class="list-group-item">Dapibus ac facilisis in</li>
-			  <li class="list-group-item">Morbi leo risus</li>
-			  <li class="list-group-item">Porta ac consectetur ac</li>
-			  <li class="list-group-item">Vestibulum at eros</li>
-			</ul>
+			<table class="table table-striped">
+				<thead>
+					<td class="col-xs-8"><b>To do</b></td>
+					<td class="col-xs-2"><b>Mark as done</b></td>
+					<td class="col-xs-2"><b>Remove</b></td>
+				</thead>
+			</table>
 		</section>
 	</div>
 </body>
