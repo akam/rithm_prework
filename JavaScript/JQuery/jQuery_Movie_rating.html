@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+	<header>
+		<h1 class="text-center">My Favourite Movies</h1>
+		<br>
+	</header>
+	<div class="container">
+		<form class="form-inline movieForm">
+		  <div class="form-group">
+		    <label for="movieTitle">Title</label>
+		    <input type="text" class="form-control" id="title" placeholder="Movie Title">
+		  </div>
+		  <div class="form-group form">
+		    <label for="rating">Rating</label>
+		    <input type="number" min="0" max="10" id="rating" class="form-control number-form" id="rating" placeholder="Rate movie from 0 to 10"
+		    style="width: 200px">
+		  </div>
+		  <button type="submit" class="btn btn-default">Add Movie</button>
+		</form>
+		<br>
+		<br>
+		<table class="table table-bordered table-striped">
+			<thead>
+				<td class="col-xs-4">Title</td>
+				<td class="col-xs-4">Rating</td>
+				<td class="col-xs-2">Delete</td>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+	<script type="text/javascript">
+		var $form = $(".movieForm");
+		$form.on("submit", function(event){
+			if(!$("#title").val() || !$("#rating").val()){
+				alert('One or more fields are empty');
+			} else {
+				event.preventDefault();
+				var $tableBody = $("tbody");
+				var $newRow = $("<tr>");
+				var $newTitle = $("<td>");
+				var $newRating = $("<td>");
+				var $newButton = $("<button>");
+				var $rating = $("#rating");
+				$newTitle.text($("#title").val());
+				$newRating.text($("#rating").val());
+				$newButton.addClass('btn btn-danger');
+				$newButton.on("click", function(e){
+					$(e.target).parent().remove();
+				});
+				$newButton.attr("type", "button");
+				$newButton.text("Delete");
+				$newRow.append($newTitle);
+				$newRow.append($newRating);
+				$newRow.append($newButton);
+				$tableBody.append($newRow);
+			}
+			$(".movieForm")[0].reset();
+		});
+	</script>
+</body>
+</html>
