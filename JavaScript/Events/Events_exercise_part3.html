@@ -8,9 +8,10 @@
     <script type="text/javascript">
     	window.onload = function(){
             //load in localStorage [Array]
-            var storage = JSON.parse(localStorage.getItem("toDoList"));
-            if(storage === null){
-                storage = [];
+            if(JSON.parse(localStorage.getItem("toDoList")) === null){
+                var storage = [];
+            } else {
+                var storage = JSON.parse(localStorage.getItem("toDoList"));
             }
             function populate(Obj){
                 var inputText = Obj.string;
@@ -94,6 +95,7 @@
                 var newObj = {};
                 newObj.string = inputText.value;
                 newObj.done = 0;
+                storage.push(newObj);
                 localStorage.setItem("toDoList", JSON.stringify(storage));
     			//Add Check/done button
     			var newCheckButton = document.createElement("button");

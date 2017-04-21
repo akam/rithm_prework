@@ -6,6 +6,39 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <style type="text/css">
+    	.sortButton{
+    		position: relative;
+    		width: 50px;
+    		height: 50px;
+    		left: 55%;
+    		bottom: 23px;
+    		margin-bottom: -110px;
+    	}
+    	.up{
+    		position: relative;
+    		bottom: 15px;
+    		right: 10px;
+
+    	}
+    	.down{
+    		position: relative;
+    		top: 8px;
+    		right: 22px;
+    	}
+    	.glyphicon:hover{
+    		cursor: pointer;
+    	}
+    	.sortRating{
+    		position: relative;
+    		width: 50px;
+    		height: 50px;
+    		left: 58%;
+    		bottom: 23px;
+    		margin-bottom: -110px;
+    	}
+    	thead{
+    		font-weight: bold;
+    	}
     </style>
 </head>
 <body>
@@ -31,19 +64,58 @@
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
-					<td class="col-xs-4">Title <span class="glyphicon glyphicon-menu-up nameUp" aria-hidden="true"></span><span class="glyphicon glyphicon-menu-down nameDown" aria-hidden="true"></span></td>
-					<td class="col-xs-4">Rating
-				  <span class="glyphicon glyphicon-menu-up numUp" aria-hidden="true"></span><span class="glyphicon glyphicon-menu-down numDown" aria-hidden="true"></span></td>
-					<td class="col-xs-2">Delete</td>
+					<td class="col-xs-4 text-center">Title 
+						<div class="sortButton">
+							<span class="glyphicon glyphicon-menu-up nameUp up small" aria-hidden="true"></span><span class="glyphicon glyphicon-menu-down nameDown down small" aria-hidden="true"></span>
+						</div>
+					</td>
+					<td class="col-xs-4 text-center">Rating
+						<div class="sortRating">
+					  		<span class="glyphicon glyphicon-menu-up numUp up small" aria-hidden="true"></span><span class="glyphicon glyphicon-menu-down numDown down small" aria-hidden="true"></span>
+					  	</div>
+				  	</td>
+					<td class="col-xs-2 text-center">Delete</td>
 				</tr>
 			</thead>
 			<tbody>
 			</tbody>
 		</table>
-		<button class="btn btn-default sort" type="submit">Sort</button>
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
 	<script type="text/javascript">
+		$(function(){
+			var storage = JSON.parse(localStorage.getItem("ratingList"));
+			if(storage === null){
+				storage = [];
+			}
+			//function to populate the list
+			function populateList(Obj){
+				var $tableBody = $("tbody");
+				var $newRow = $("<tr>");
+				var $newTitle = $("<td>");
+				var $newRating = $("<td>");
+				var $newData3 = $("<td>");
+				var $newButton = $("<button>");
+				var $rating = $("#rating");
+				$newTitle.text(Obj.name);
+				$newRating.text(Obj.rating);
+				$newButton.addClass('btn btn-danger btn-sm');
+				$newData3.addClass('text-center');
+				// $newButton.on("click", function(e){
+				// 	$(e.target).parent().remove();
+				// });
+				$newButton.attr("type", "button");
+				$newButton.text("Delete");
+				$newRow.append($newTitle);
+				$newRow.append($newRating);
+				$newData3.append($newButton);
+				$newRow.append($newData3);
+				$tableBody.append($newRow);
+			}
+			for(var i = 0; i < storage.length; i++){
+				populateList(storage[i]);
+			}
+			//loop through the storage. 
 		var $form = $(".movieForm");
 		$form.on("submit", function(event){
 			if(!$("#title").val() || !$("#rating").val()){
@@ -59,7 +131,8 @@
 				var $rating = $("#rating");
 				$newTitle.text($("#title").val());
 				$newRating.text($("#rating").val());
-				$newButton.addClass('btn btn-danger');
+				$newButton.addClass('btn btn-danger btn-sm');
+				$newData3.addClass('text-center');
 				// $newButton.on("click", function(e){
 				// 	$(e.target).parent().remove();
 				// });
@@ -70,10 +143,16 @@
 				$newData3.append($newButton);
 				$newRow.append($newData3);
 				$tableBody.append($newRow);
+				//storage
+				var newObj = {}
+				newObj.name = $newTitle.text();
+				newObj.rating = $newRating.text();
+				storage.push(newObj);
+				localStorage.setItem("ratingList", JSON.stringify(storage));
 			}	
 			$(".movieForm")[0].reset();
 		});
-			$("table").on("click","button", function(e){
+			$("tbody").on("click","button", function(e){
 			$(e.target).parent().parent().remove();
 		});
 
@@ -133,6 +212,7 @@
 				$('tbody').append('<tr>' + el.innerHTML + '</tr>');
 			});
 		});
+	})
 	</script>
 </body>
 </html>
