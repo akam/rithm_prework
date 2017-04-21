@@ -30,13 +30,17 @@
 		<br>
 		<table class="table table-bordered table-striped">
 			<thead>
-				<td class="col-xs-4">Title</td>
-				<td class="col-xs-4">Rating</td>
-				<td class="col-xs-2">Delete</td>
+				<tr>
+					<td class="col-xs-4">Title <span class="glyphicon glyphicon-menu-up nameUp" aria-hidden="true"></span><span class="glyphicon glyphicon-menu-down nameDown" aria-hidden="true"></span></td>
+					<td class="col-xs-4">Rating
+				  <span class="glyphicon glyphicon-menu-up numUp" aria-hidden="true"></span><span class="glyphicon glyphicon-menu-down numDown" aria-hidden="true"></span></td>
+					<td class="col-xs-2">Delete</td>
+				</tr>
 			</thead>
 			<tbody>
 			</tbody>
 		</table>
+		<button class="btn btn-default sort" type="submit">Sort</button>
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
 	<script type="text/javascript">
@@ -50,22 +54,84 @@
 				var $newRow = $("<tr>");
 				var $newTitle = $("<td>");
 				var $newRating = $("<td>");
+				var $newData3 = $("<td>");
 				var $newButton = $("<button>");
 				var $rating = $("#rating");
 				$newTitle.text($("#title").val());
 				$newRating.text($("#rating").val());
 				$newButton.addClass('btn btn-danger');
-				$newButton.on("click", function(e){
-					$(e.target).parent().remove();
-				});
+				// $newButton.on("click", function(e){
+				// 	$(e.target).parent().remove();
+				// });
 				$newButton.attr("type", "button");
 				$newButton.text("Delete");
 				$newRow.append($newTitle);
 				$newRow.append($newRating);
-				$newRow.append($newButton);
+				$newData3.append($newButton);
+				$newRow.append($newData3);
 				$tableBody.append($newRow);
-			}
+			}	
 			$(".movieForm")[0].reset();
+		});
+			$("table").on("click","button", function(e){
+			$(e.target).parent().parent().remove();
+		});
+
+		$('.numDown').on("click", function(){
+			var $arr = $('tbody tr');
+			$arr.sort(function(a, b){		
+				var x = a.childNodes[1].innerText; 
+				var y = b.childNodes[1].innerText;
+				return x - y;
+			});
+				$('tbody').empty();
+			$arr.each(function(i,el){
+				$('tbody').append('<tr>' + el.innerHTML + '</tr>');
+			});
+		});
+		$('.numUp').on("click", function(){
+			var $arr = $('tbody tr');
+			$arr.sort(function(a, b){		
+				var x = a.childNodes[1].innerText; 
+				var y = b.childNodes[1].innerText;
+				return y - x;
+			});
+				$('tbody').empty();
+			$arr.each(function(i,el){
+				$('tbody').append('<tr>' + el.innerHTML + '</tr>');
+			});
+		});
+		$('.nameDown').on("click", function(){
+			var $arr = $('tbody tr');
+			$arr.sort(function(a, b){		
+				var x = a.childNodes[0].innerText; 
+				var y = b.childNodes[0].innerText;
+				if(x > y){
+					return -1;
+				} else {
+					return 1;
+				}
+			});
+				$('tbody').empty();
+			$arr.each(function(i,el){
+				$('tbody').append('<tr>' + el.innerHTML + '</tr>');
+			});
+		});
+		$('.nameUp').on("click", function(){
+			var $arr = $('tbody tr');
+			$arr.sort(function(a, b){		
+				var x = a.childNodes[0].innerText; 
+				var y = b.childNodes[0].innerText;
+				if(x > y){
+					return -1;
+				} else {
+					return 1;
+				}
+			});
+				$('tbody').empty();
+			$arr.each(function(i,el){
+				$('tbody').append('<tr>' + el.innerHTML + '</tr>');
+			});
 		});
 	</script>
 </body>
