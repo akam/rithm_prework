@@ -9,7 +9,7 @@
     	.sortButton{
     		position: relative;
     		width: 50px;
-    		height: 50px;
+    		height: 50px;	
     		left: 55%;
     		bottom: 23px;
     		margin-bottom: -110px;
@@ -153,6 +153,12 @@
 			$(".movieForm")[0].reset();
 		});
 			$("tbody").on("click","button", function(e){
+			for(var j = 0; j < storage.length; j++){
+				if($(e.target).parent().parent().children()[0].innerText === storage[j].name && $(e.target).parent().parent().children()[1].innerText === storage[j].rating){
+					storage.splice(j ,1);
+					localStorage.setItem("ratingList", JSON.stringify(storage));
+				}
+			}
 			$(e.target).parent().parent().remove();
 		});
 
