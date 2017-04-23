@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Giphy party</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <style>
+    	body{
+    		background: black;
+    	}
+    	header{
+    		text-align: center;
+    		background: linear-gradient(rgb(0,0,0),rgb(10,10,10), rgb(20,20,20), rgb(10,10,10),rgb(0,0,0));
+    		padding-bottom: 10px;
+    		padding-top: 10px;
+    		color: lightgrey;
+    	}
+    	form{
+    		margin: 0 auto;
+    	}
+    </style>
+</head>
+<body>
+	<header>
+		<h1>GIPHY PARTY</h1>
+	</header>
+	<section class="container">
+		<form class="form-inline text-center">
+		  <div class="form-group">
+		    <input type="text" class="form-control" id="searchText" placeholder="Enter a search term">
+		    <button type="submit" class="btn btn-default" id="search">Search Meme</button>
+		  </div>
+		  <button type="submit" class="btn btn-danger" id="remove">Remove all memes</button>
+		</form>
+		<div class='images'>
+		</div>
+	</section>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+	<script>
+		$('#search').on("click", function(e){
+			e.preventDefault();
+			$.ajax({
+			    method: "GET",
+			    url: "http://api.giphy.com/v1/gifs/search",
+			    data: {
+			        // a key of t and a value of titanic which will look like ?t=titanic
+			        q: $('#searchText').val() + "+memes",
+			        api_key: 'dc6zaTOxFJmzC'
+			    },
+			    dataType: "json"
+			}).then(function(response){
+			    var $img = $('<img>');
+			    $img.attr('src', response.data[Math.floor(Math.random()*response.data.length)].images.original.url);
+			    $('.images').append($img);
+			}).catch(function(error){
+			    console.log(error);
+			})
+		});
+		$('#remove').on("click", function(){
+			$('.images').empty;
+		})
+	</script>
+</body>
+</html>
