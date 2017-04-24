@@ -149,3 +149,39 @@ filterLetters(["a","a","b","c","A"], "a"); // 3
 filterLetters(["a","a","b","c","A"], "z"); // 0
 filterLetters(["a","a","b","c","A"], "B"); // 1
 ```
+
+Optional Bonus
+
+Write a function called `addKeyAndValue` which accepts three parameters, an array (of objects), a key and a value. This function should return the array of objects after each key and value has been added. You can do this a few ways, either by reducing starting with an empty array and making copies of the object or by starting with the actual array!
+
+
+```javascript
+function addKeyAndValue(arr, key, bol){
+	return arr.reduce(function(acc,next){
+		var newObj = {};
+		newObj.name = next.name;
+		newObj[key] = bol;
+		console.log(newObj);
+		return acc.concat(newObj);
+    },[]);
+}
+
+addKeyAndValue([{name: 'Elie'},{name: 'Tim'},{name: 'Elie'}], "isInstructor", true);
+
+/*
+[
+    {
+        name: 'Elie',
+        isInstructor: true
+    },
+    {
+        name: 'Tim',
+        isInstructor: true
+    },
+    {
+        name: 'Elie',
+        isInstructor: true
+    }
+]
+*/
+```
