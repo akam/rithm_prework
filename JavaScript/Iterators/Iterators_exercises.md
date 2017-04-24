@@ -113,3 +113,39 @@ filterKey([{name: "Elie", isInstructor:true, isHilarious: false},{name: "Tim", i
 // [{name: "Tim", isInstructor:true, isHilarious:true}]
 ```
 
+## .reduce Exercises
+
+Write a function called `extractKey` which accepts two parameters, an array of objects, and the name of a key and returns an array with just the values for that key:
+
+```javascript
+function extractKey(arr, key){
+	return arr.reduce(function(acc,nextVal,i){
+		acc.push(nextVal.name);
+		return acc;
+    },[]);
+}
+
+extractKey([{name: "Elie", isInstructor:true},{name: "Tim", isInstructor:true},{name: "Matt", isInstructor:true}], "name");
+
+// ["Elie", "Tim", "Matt"]
+```
+
+Write a function called `filterLetters` which accepts an array of letters and returns the number of occurrences of a specific letter. This function should be case **insensitive**
+
+```javascript
+function filterLetters(arr,key){
+	return arr.reduce(function(acc,val){
+		if(val.toLowerCase() === key.toLowerCase()){
+			console.log(acc++);
+			console.log(++acc);
+			return ++acc;
+        } else {
+			return acc;
+        } 
+    },0);	
+}
+
+filterLetters(["a","a","b","c","A"], "a"); // 3
+filterLetters(["a","a","b","c","A"], "z"); // 0
+filterLetters(["a","a","b","c","A"], "B"); // 1
+```
