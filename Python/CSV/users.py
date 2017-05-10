@@ -11,4 +11,3 @@ with open('users.csv', 'a') as file:
 	new = full_name.split(" ")
 	data_writer = csv.writer(file, delimiter = '|')
 	data_writer.writerow(new)
-
